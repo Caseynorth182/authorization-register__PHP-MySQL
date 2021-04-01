@@ -19,6 +19,9 @@ if (mb_strlen($login) < 5 || mb_strlen($login) > 90) {
     die();
 }
 
+//КЕШИРОВАНИЕ ПАРОЛЯ + СОЛЬ
+$pass = md5($pass."asfqwezxc345");
+
 //INSERT данных в БД
 $sql = "INSERT INTO users (login, name, password) VALUE (:login, :name, :password)";
 $stmt = $pdo->prepare($sql);
@@ -28,7 +31,7 @@ $res = $stmt->execute([
     'password' => $pass,
 ]);
 
-echo "<pre>";
-var_dump($stmt);
+header('location: /');
+
 
 
